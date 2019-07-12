@@ -1,20 +1,25 @@
-import os
-from setuptools import setup, find_packages
+import setuptools
 
-def read(filename):
-    return open(os.path.join(os.path.dirname(__file__), filename)).read()
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-setup(
+
+setuptools.setup(
     name = 'pretty html table',
-    version = '0.1dev',
-    license = 'MIT',
-    packages = find_packages('src'),
-    package_dir = {'':'src'},
+    version = '0.1.dev0',
+    scripts=['ph_table'] ,
+    author="Renaud Viot",
+    author_email="renaud.viot@simply-bi.com",
     description = 'Make pandas dataframe looking pretty again',
-    long_description = read('README.md'),
-    url = 'github to add here',
+    long_description = long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/sbi-rviot/ph_table",
     install_requires = ['pandas'],
-    extras_require = {},
-    package_data = {}
-)
-    
+    packages=setuptools.find_packages('pandas'),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        ],
+    )
+
