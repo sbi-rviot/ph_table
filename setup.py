@@ -5,9 +5,9 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name = 'pretty html table',
+    name = 'pretty_html_table',
     version = '0.1.dev0',
-    scripts=['ph_table'] ,
+    scripts=['pretty_html_table.py'] ,
     author="Renaud Viot",
     author_email="renaud.viot@simply-bi.com",
     description = 'Make pandas dataframe looking pretty again',
