@@ -1,4 +1,4 @@
-#pretty_html_table - Beautiful html tables made easy
+# pretty_html_table - Beautiful html tables made easy
 Detailed usage documentation is still in progress
 The objective of this package is to convert a pandas dataframe into a pretty html table.
 As of now, 10 colors are available. This package is embedding very nicely with other packages used to send emails.
@@ -6,23 +6,23 @@ The format is set down to the line item, which allows it to be understood by eve
 
 This is how you can install it on your machine:
 
-``
+```
 pip install pretty_html_table
-``
+```
 
 This is for example how you can convert your dataframe:
 
-``
+```
 import pretty_html_table
 html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
 print(html_table_blue_light)
-``
+```
 
-##Why choose pretty_html_table?
+## Why choose pretty_html_table?
 It integrates very well with other python packages used to send emails. Just add the result of this package to the body of the email and voila.
 
 
-##List of colors available
+## List of colors available
 
 | Name          | font style     | Header                                                        | Rows                                                              |
 |---------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------|
@@ -38,12 +38,12 @@ It integrates very well with other python packages used to send emails. Just add
 | green_dark'   | Century Gothic | Bold: yes / Background color: dark green / Font color: white  | Odd background color: light green / Even background color: white  |
 
 
-##Example of an integration with the O365 package
+## Example of an integration with the O365 package
 [O365](https://pypi.org/project/O365/)
 
 First, we create a function to send an email:
 
-``
+```
 import O365
 from O365 import Account
 
@@ -56,11 +56,11 @@ def send_email(account, to, subject, start, body, end):
     m.subject = subject
     m.body = start + body + end
     m.send()
-``
+```
 
 Then we can write the start of an email and the end of the email using the html language:
 
-``
+```
 start = """<html>
                 <body>
                     <strong>There should be an table here:</strong></br>"""
@@ -69,11 +69,11 @@ start = """<html>
 end = """</body>
     </html>
     """
-``
+```
 
 Finally we can can pretty_table_html package and send the email:
 
-``
+```
 import ph_table
 
 html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
@@ -84,7 +84,7 @@ send_email(account
            , start
            , html_table_blue_light
            , end)
-``
+```
 
 Here are all of the currently available colors:
 ![Light](C:/Users/renau/Documents/simply-bi/processes/HTML/TABLE/1.png)
