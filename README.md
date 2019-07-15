@@ -74,11 +74,7 @@ end = """</body>
 Finally we can can pretty_table_html package and send the email:
 
 ```
-<<<<<<< HEAD
 from pretty_html_table import build_table
-=======
-import pretty_html_table
->>>>>>> a79a66ac73b5e636ffa8ba97e9a05d21be3dd637
 
 html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
 
