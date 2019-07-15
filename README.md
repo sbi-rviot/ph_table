@@ -87,5 +87,5 @@ send_email(account
 ```
 
 Here are all of the currently available colors:
-![Light](C:/Users/renau/Documents/simply-bi/processes/HTML/TABLE/1.png)
-![Dark](C:/Users/renau/Documents/simply-bi/processes/HTML/TABLE/2.png)
+![Light](image/1.PNG)
+![Dark](image/2.PNG)
