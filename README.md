@@ -86,6 +86,7 @@ send_email(account
            , end)
 ```
 
-Here are all of the currently available colors:
+Here are all of the currently available colors: 
+
 ![Light](image/1.PNG)
 ![Dark](image/2.PNG)
