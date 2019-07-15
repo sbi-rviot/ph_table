@@ -1,0 +1,3 @@
+build/*
+dist/*
+pretty_html_table.egg-info/*
