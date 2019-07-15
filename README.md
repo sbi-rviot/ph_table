@@ -13,7 +13,7 @@ pip install pretty_html_table
 This is for example how you can convert your dataframe:
 
 ```
-import pretty_html_table
+from pretty_html_table import build_table
 html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
 print(html_table_blue_light)
 ```
@@ -74,7 +74,7 @@ end = """</body>
 Finally we can can pretty_table_html package and send the email:
 
 ```
-import ph_table
+from pretty_html_table import build_table
 
 html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
 

@@ -6,8 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'pretty_html_table',
-    version = '0.1.dev0',
-    scripts=['pretty_html_table.py'] ,
+    version = '0.6.dev0',
     author="Renaud Viot",
     author_email="renaud.viot@simply-bi.com",
     description = 'Make pandas dataframe looking pretty again',
@@ -15,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/sbi-rviot/ph_table",
     install_requires = ['pandas'],
-    packages=setuptools.find_packages('pandas'),
+    packages=['pretty_html_table'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
