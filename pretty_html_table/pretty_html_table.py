@@ -29,6 +29,12 @@ def table_color(color_choice):
         odd_background_color = '#E2EFDA'
         header_background_color = '#FFFFFF'
 
+    if color_choice == 'red_light':
+        color = '#823535'
+        border_bottom = '2px solid #823535'
+        odd_background_color = '#efdada'
+        header_background_color = '#FFFFFF'
+
     if color_choice == 'yellow_dark':
         color = '#FFFFFF'
         border_bottom = '2px solid #BF8F00'
@@ -58,6 +64,12 @@ def table_color(color_choice):
         border_bottom = '2px solid #548235'
         odd_background_color = '#E2EFDA'
         header_background_color = '#548235'
+
+    if color_choice == 'red_dark':
+        color = '#FFFFFF'
+        border_bottom = '2px solid #823535'
+        odd_background_color = '#efdada'
+        header_background_color = '#823535'
         
     return color, border_bottom, odd_background_color, header_background_color
 

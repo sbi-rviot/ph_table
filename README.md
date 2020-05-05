@@ -36,6 +36,8 @@ It integrates very well with other python packages used to send emails. Just add
 | 'yellow_dark'  | Century Gothic | Bold: yes / Background color: dark yellow / Font color: white | Odd background color: light yellow / Even background color: white |
 | 'green_light'  | Century Gothic | Bold: yes / Background color: white / Font color: dark green  | Odd background color: light green / Even background color: white  |
 | 'green_dark'   | Century Gothic | Bold: yes / Background color: dark green / Font color: white  | Odd background color: light green / Even background color: white  |
+| 'red_light'  | Century Gothic | Bold: yes / Background color: white / Font color: dark red | Odd background color: light red / Even background color: white  |
+| 'red_dark'   | Century Gothic | Bold: yes / Background color: dark red / Font color: white  | Odd background color: light red / Even background color: white  |
 
 
 ## Example of an integration with the O365 package
