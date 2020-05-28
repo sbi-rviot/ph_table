@@ -73,8 +73,11 @@ def table_color(color_choice):
         
     return color, border_bottom, odd_background_color, header_background_color
 
-def build_table(df, color, font_family = 'Century Gothic', text_align = 'left', padding="0px 20px 0px 0px", even_background_color = '#FFFFFF'):
+def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
 
+    #setting color
+    padding="0px 20px 0px 0px"
+    even_background_color = '#FFFFFF'
     color, border_bottom, odd_background_color, header_background_color = table_color(color)
 
     #build html table
@@ -86,6 +89,7 @@ def build_table(df, color, font_family = 'Century Gothic', text_align = 'left', 
             df_html_output = df_html_output.replace('<th>'
                                                     ,'<th style = "background-color: ' + header_background_color
                                                     + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
                                                     + ';color: ' + color
                                                     + ';text-align: ' + text_align
                                                     + ';border-bottom: ' + border_bottom
@@ -95,6 +99,7 @@ def build_table(df, color, font_family = 'Century Gothic', text_align = 'left', 
             df_html_output = df_html_output.replace('<td>'
                                                     ,'<td style = "background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding + '">')
 
@@ -109,6 +114,7 @@ def build_table(df, color, font_family = 'Century Gothic', text_align = 'left', 
             df_html_output = df_html_output.replace('<td>'
                                                     ,'<td style = "background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding + '">')
 
@@ -123,6 +129,7 @@ def build_table(df, color, font_family = 'Century Gothic', text_align = 'left', 
             df_html_output = df_html_output.replace('<td>'
                                                     ,'<td style = "background-color: ' + even_background_color
                                                     + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding + '">')
 
