@@ -92,3 +92,12 @@ Here are all of the currently available colors:
 
 ![Light](image/1.PNG)
 ![Dark](image/2.PNG)
+
+## Additional arguments
+Since we created this library, we have added serveral optional arguments that we hope willl help you:
+
+```
+build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left')
+```
+
+You can now decide on the font, the size and the alignment of the text.
