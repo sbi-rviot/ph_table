@@ -73,11 +73,9 @@ def table_color(color_choice):
         
     return color, border_bottom, odd_background_color, header_background_color
 
-def build_table(df, color):
+def build_table(df, color, font_family = 'Century Gothic', text_align = 'left'):
 
     #setting color
-    font_family = 'Century Gothic'
-    text_align = 'left'
     padding="0px 20px 0px 0px"
     even_background_color = '#FFFFFF'
     color, border_bottom, odd_background_color, header_background_color = table_color(color)
