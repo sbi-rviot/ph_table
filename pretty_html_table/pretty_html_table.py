@@ -82,6 +82,7 @@ def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic',
     color, border_bottom, odd_background_color, header_background_color = table_color(color)
 
     #build html table
+    body = ""
     a = 0
     while a != len(df):
         if a == 0:        
