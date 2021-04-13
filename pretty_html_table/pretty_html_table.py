@@ -18,14 +18,14 @@ t_color = {
 }
         
 def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
+    if df.empty:
+      return ''
     # Set color
     padding="0px 20px 0px 0px"
     even_background_color = '#FFFFFF'
     # Us dict of tuples instead of function 
     color, border_bottom, odd_background_color, header_background_color = t_color[color]
 
-    #build html table
-    body = ""
     a = 0
     while a != len(df):
         if a == 0:        
