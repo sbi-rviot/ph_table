@@ -1,88 +1,31 @@
-def table_color(color_choice):
-    if color_choice == 'yellow_light':
-        color = '#BF8F00'
-        border_bottom = '2px solid #BF8F00'
-        odd_background_color = '#FFF2CC'
-        header_background_color = '#FFFFFF'
+import pandas pd
 
-    if color_choice == 'grey_light':
-        color = '#808080'
-        border_bottom = '2px solid #808080'
-        odd_background_color = '#EDEDED'
-        header_background_color = '#FFFFFF'
+# Reformat table_color as dict of tuples
 
-    if color_choice == 'blue_light':
-        color = '#305496'
-        border_bottom = '2px solid #305496'
-        odd_background_color = '#D9E1F2'
-        header_background_color = '#FFFFFF'
-
-    if color_choice == 'orange_light':
-        color = '#C65911'
-        border_bottom = '2px solid #C65911'
-        odd_background_color = '#FCE4D6'
-        header_background_color = '#FFFFFF'
-
-    if color_choice == 'green_light':
-        color = '#548235'
-        border_bottom = '2px solid #548235'
-        odd_background_color = '#E2EFDA'
-        header_background_color = '#FFFFFF'
-
-    if color_choice == 'red_light':
-        color = '#823535'
-        border_bottom = '2px solid #823535'
-        odd_background_color = '#efdada'
-        header_background_color = '#FFFFFF'
-
-    if color_choice == 'yellow_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #BF8F00'
-        odd_background_color = '#FFF2CC'
-        header_background_color = '#BF8F00'
-
-    if color_choice == 'grey_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #808080'
-        odd_background_color = '#EDEDED'
-        header_background_color = '#808080'
-
-    if color_choice == 'blue_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #305496'
-        odd_background_color = '#D9E1F2'
-        header_background_color = '#305496'
-
-    if color_choice == 'orange_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #C65911'
-        odd_background_color = '#FCE4D6'
-        header_background_color = '#C65911'
-
-    if color_choice == 'green_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #548235'
-        odd_background_color = '#E2EFDA'
-        header_background_color = '#548235'
-
-    if color_choice == 'red_dark':
-        color = '#FFFFFF'
-        border_bottom = '2px solid #823535'
-        odd_background_color = '#efdada'
-        header_background_color = '#823535'
+t_color = {
+    'yellow_light' : ('#BF8F00', '2px solid #BF8F00', '#FFF2CC', '#FFFFFF')
+    'grey_light' : ('#808080', '2px solid #808080', '#EDEDED', '#FFFFFF'),
+    'blue_light' : ('#305496', '2px solid #305496', '#D9E1F2', '#FFFFFF'),
+    'orange_light' : ('#C65911', '2px solid #C65911', '#FCE4D6', '#FFFFFF'),
+    'green_light' : ('#548235', '2px solid #548235', '#E2EFDA', '#FFFFFF'), 
+    'red_light' : ('#823535', '2px solid #823535', '#efdada', '#FFFFFF'),
+    'yellow_dark' : ('#FFFFFF', '2px solid #BF8F00', '#FFF2CC', '#BF8F00'),
+    'grey_dark' : ('#FFFFFF', '2px solid #808080', '#EDEDED', '#808080'),
+    'blue_dark': ('#FFFFFF', '2px solid #305496', '#D9E1F2', '#305496'),
+    'orange_dark' : ('#FFFFFF', '2px solid #C65911', '#FCE4D6', '#C65911'),
+    'green_dark' : ('#FFFFFF', '2px solid #548235', '#E2EFDA', '#548235'),
+    'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
+}
         
-    return color, border_bottom, odd_background_color, header_background_color
-
-
 def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
-
-    #setting color
+    if df.empty:
+      return ''
+    # Set color
     padding="0px 20px 0px 0px"
     even_background_color = '#FFFFFF'
-    color, border_bottom, odd_background_color, header_background_color = table_color(color)
+    # Us dict of tuples instead of function 
+    color, border_bottom, odd_background_color, header_background_color = t_color[color]
 
-    #build html table
-    body = ""
     a = 0
     while a != len(df):
         if a == 0:        
