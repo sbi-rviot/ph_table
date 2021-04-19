@@ -1,4 +1,4 @@
-import pandas pd
+import pandas as pd
 
 # Reformat table_color as dict of tuples
 
