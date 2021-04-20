@@ -2,8 +2,8 @@ import pandas as pd
 
 # Reformat table_color as dict of tuples
 
-t_color = {
-    'yellow_light' : ('#BF8F00', '2px solid #BF8F00', '#FFF2CC', '#FFFFFF')
+dict_colors = {
+    'yellow_light' : ('#BF8F00', '2px solid #BF8F00', '#FFF2CC', '#FFFFFF'),
     'grey_light' : ('#808080', '2px solid #808080', '#EDEDED', '#FFFFFF'),
     'blue_light' : ('#305496', '2px solid #305496', '#D9E1F2', '#FFFFFF'),
     'orange_light' : ('#C65911', '2px solid #C65911', '#FCE4D6', '#FFFFFF'),
@@ -20,11 +20,11 @@ t_color = {
 def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
     if df.empty:
       return ''
+     
     # Set color
     padding="0px 20px 0px 0px"
     even_background_color = '#FFFFFF'
-    # Us dict of tuples instead of function 
-    color, border_bottom, odd_background_color, header_background_color = t_color[color]
+    color, border_bottom, odd_background_color, header_background_color = dict_colors[color]
 
     a = 0
     while a != len(df):
