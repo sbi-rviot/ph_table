@@ -1,7 +1,5 @@
 import pandas as pd
 
-# Reformat table_color as dict of tuples
-
 t_color = {
     'yellow_light' : ('#BF8F00', '2px solid #BF8F00', '#FFF2CC', '#FFFFFF')
     'grey_light' : ('#808080', '2px solid #808080', '#EDEDED', '#FFFFFF'),
@@ -17,13 +15,12 @@ t_color = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
+def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left'):
     if df.empty:
       return ''
     # Set color
     padding="0px 20px 0px 0px"
     even_background_color = '#FFFFFF'
-    # Us dict of tuples instead of function 
     color, border_bottom, odd_background_color, header_background_color = t_color[color]
 
     a = 0

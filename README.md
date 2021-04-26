@@ -1,25 +1,39 @@
 # pretty_html_table - Beautiful html tables made easy
-Detailed usage documentation is still in progress
-The objective of this package is to convert a pandas dataframe into a pretty html table.
-As of now, 10 colors are available. This package is embedding very nicely with other packages used to send emails.
-The format is set down to the line item, which allows it to be understood by every email providers (instead of using CSS style).
 
-This is how you can install it on your machine:
+`pretty_html_table` exists to convert a pandas DataFrame into a pretty html table for use in email.  The intended target audience is anyone who needs to send reports via email and would like to make their tables look more attractive.
+
+12 different color themes are available. The output of the package embeds nicely with other packages used to send html emails, such as [email](https://docs.python.org/3/library/email.examples.html) or [O365](https://pypi.org/project/O365/).
+The html formatting is set at the DataFrame row level, which allows nearly every email provider to parse it.  This obviates the need to grok out how the CSS may interact with the sending/recieving email provider.
+
+Use [`pip`](https://pypi.org/project/pretty-html-table/) to install the package:
 
 ```
 pip install pretty_html_table
 ```
 
-This is for example how you can convert your dataframe:
+A simple example to load an Excel file to a pandas DataFrame, convert it to html, and then save to an html file:
 
 ```
 from pretty_html_table import build_table
-html_table_blue_light = build_table(pd.read_excel('df.xlsx'), 'blue_light')
-print(html_table_blue_light)
+
+df = pd.read_excel('df.xlsx')
+html_table_blue_light = build_table(df, 'blue_light')
+
+# Save to html file
+with open('pretty_table.html', 'w') as f:
+    f.write(html_table_blue_light)
+
+# Compare to the pandas .to_html method:
+with open('pandas_table.html', 'w') as f:
+    f.write(df.to_html())
 ```
 
+Use any browser to open `pretty_table.html` to see how the table would appear in an html email.
+
+
 ## Why choose pretty_html_table?
-It integrates very well with other python packages used to send emails. Just add the result of this package to the body of the email and voila.
+
+Output is ready to be sent via any Python package used to send emails. Insert the result of this package to the body of the email and voila.
 
 
 ## List of colors available
@@ -41,13 +55,14 @@ It integrates very well with other python packages used to send emails. Just add
 
 
 ## Example of an integration with the O365 package
-[O365](https://pypi.org/project/O365/)
 
-First, we create a function to send an email:
+First, create a function to send an email:
 
 ```
-import O365
 from O365 import Account
+
+# Never hard code credentials or store them in a repo
+# Use environmental variables instead
 
 credentials = (o365credid, o365credpwd)
 account = Account(credentials)
@@ -60,20 +75,19 @@ def send_email(account, to, subject, start, body, end):
     m.send()
 ```
 
-Then we can write the start of an email and the end of the email using the html language:
+Then create the start and end of an email in html:
 
 ```
 start = """<html>
                 <body>
-                    <strong>There should be an table here:</strong></br>"""
+                    <strong>Data table here:</strong><br />"""
 
 
-end = """</body>
-    </html>
-    """
+end = """       </body>
+            </html>"""
 ```
 
-Finally we can can pretty_table_html package and send the email:
+Finally we can utilize `pretty_table_html` to convert our Excel file and send the email:
 
 ```
 from pretty_html_table import build_table
@@ -85,7 +99,8 @@ send_email(account
            , 'test table'
            , start
            , html_table_blue_light
-           , end)
+           , end
+           )
 ```
 
 Here are all of the currently available colors: 
@@ -94,10 +109,18 @@ Here are all of the currently available colors:
 ![Dark](image/2.PNG)
 
 ## Additional arguments
-Since we created this library, we have added serveral optional arguments that we hope willl help you:
+Several optional arguments now exist that allow the user to control the table's font, font size, and alignment:
+
+* `font_size` - accepts absolute keywords (`medium`) and pixel values (`20px`)
+* `font_family` - best practice is to include a generic font family in case a recipient's client cannot render the chosen font.  The example below designates `Open Sans` as a font, but designates the generic `sans-serif` family as a fallback.  It's possible that the fallback font may be utilized in case a recipient has web fonts blocked for security reasons, or if they are viewing the email on a client that does not have acces to Google Fonts.
+* `text_align` - accepts standard html property values such as `left`, `right`, `center`, `justify`.
 
 ```
-build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left')
+html_table = build_table(df
+                        , 'yellow_dark'
+                        , font_size='medium'
+                        , font_family='Open Sans
+                        , sans-serif'
+                        , text_align='left'
+                        )
 ```
-
-You can now decide on the font, the size and the alignment of the text.
