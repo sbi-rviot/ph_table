@@ -1,5 +1,7 @@
 import pandas as pd
 
+# Reformat table_color as dict of tuples
+
 dict_colors = {
     'yellow_light' : ('#BF8F00', '2px solid #BF8F00', '#FFF2CC', '#FFFFFF'),
     'grey_light' : ('#808080', '2px solid #808080', '#EDEDED', '#FFFFFF'),
