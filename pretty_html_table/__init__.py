@@ -1,1 +1,1 @@
-from .pretty_html_table import table_color, build_table
+from .pretty_html_table import build_table

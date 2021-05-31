@@ -6,7 +6,8 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'pretty_html_table',
-    version = '0.9.3',
+    version = '0.9.6',
+    license_files = ('LICENSE.txt',),
     author="Renaud Viot",
     author_email="renaud.viot@simply-bi.com",
     description = 'Make pandas dataframe looking pretty again',
