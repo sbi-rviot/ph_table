@@ -17,7 +17,7 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size = 'medium', font_family = 'Century Gothic', text_align = 'left'):
+def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left'):
     if df.empty:
       return ''
      
