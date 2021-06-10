@@ -17,7 +17,7 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left'):
+def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False):
     if df.empty:
       return ''
      
@@ -29,7 +29,7 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
     a = 0
     while a != len(df):
         if a == 0:        
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = False, border = 0)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0)
             # change format of header
             df_html_output = df_html_output.replace('<th>'
                                                     ,'<th style = "background-color: ' + header_background_color
@@ -38,7 +38,8 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
                                                     + ';color: ' + color
                                                     + ';text-align: ' + text_align
                                                     + ';border-bottom: ' + border_bottom
-                                                    + ';padding: ' + padding + '">')
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
 
             #change format of table
             df_html_output = df_html_output.replace('<td>'
@@ -46,29 +47,48 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
-                                                    + ';padding: ' + padding + '">')
-
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
             body = """<p>""" + format(df_html_output)
 
             a = 1
 
         elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = False, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
              
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + odd_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+
             #change format of table
             df_html_output = df_html_output.replace('<td>'
                                                     ,'<td style = "background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
-                                                    + ';padding: ' + padding + '">')
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
 
             body = body + format(df_html_output)
 
             a += 1       
 
         elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = False, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
+             
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + even_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
              
             #change format of table
             df_html_output = df_html_output.replace('<td>'
@@ -76,7 +96,8 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
-                                                    + ';padding: ' + padding + '">')
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
 
             body = body + format(df_html_output)
 

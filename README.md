@@ -114,6 +114,8 @@ Several optional arguments now exist that allow the user to control the table's 
 * `font_size` - accepts absolute keywords (`medium`) and pixel values (`20px`)
 * `font_family` - best practice is to include a generic font family in case a recipient's client cannot render the chosen font.  The example below designates `Open Sans` as a font, but designates the generic `sans-serif` family as a fallback.  It's possible that the fallback font may be utilized in case a recipient has web fonts blocked for security reasons, or if they are viewing the email on a client that does not have acces to Google Fonts.
 * `text_align` - accepts standard html property values such as `left`, `right`, `center`, `justify`.
+* `width` - accepts string representation of pixels. For instance, for the columns to have a width of 100px, you would write: width="100px".
+* `index` - bolean. False by default - If you write index=True, index of the dataframe will then be visible in your table.
 
 ```
 html_table = build_table(df
@@ -122,5 +124,7 @@ html_table = build_table(df
                         , font_family='Open Sans
                         , sans-serif'
                         , text_align='left'
+                        , width='auto'
+                        , index=False
                         )
 ```
