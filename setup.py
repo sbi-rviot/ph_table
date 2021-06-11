@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name = 'pretty_html_table',
-    version = '0.9.8',
+    version = '0.9.9',
     license_files = ('LICENSE.txt',),
     author="Renaud Viot",
     author_email="renaud.viot@simply-bi.com",
