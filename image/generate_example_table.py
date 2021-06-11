@@ -20,7 +20,11 @@ def generate_table():
 
     output = start \
             + '<p style="font-family:Century Gothic;">blue_light<br /><p>' \
-            + build_table(df, 'blue_light') \
+            + build_table(
+                df, 
+                'blue_light',
+                even_color='white',
+                even_bg_color='grey') \
             + '<p style="font-family:Century Gothic;">blue_dark<br /><p>' \
             + build_table(df, 'blue_dark') \
             + '<p style="font-family:Century Gothic;">grey_light<br /><p>' \
