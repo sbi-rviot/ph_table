@@ -17,13 +17,12 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False):
+def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False, even_color='black', even_bg_color='white'):
     if df.empty:
       return ''
      
     # Set color
     padding="0px 20px 0px 0px"
-    even_background_color = '#FFFFFF'
     color, border_bottom, odd_background_color, header_background_color = dict_colors[color]
 
     a = 0
@@ -83,7 +82,8 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
-                                                    ,'<th style = "background-color: ' + even_background_color
+                                                    ,'<th style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
@@ -92,7 +92,8 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
              
             #change format of table
             df_html_output = df_html_output.replace('<td>'
-                                                    ,'<td style = "background-color: ' + even_background_color
+                                                    ,'<td style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align

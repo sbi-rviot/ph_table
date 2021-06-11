@@ -116,6 +116,8 @@ Several optional arguments now exist that allow the user to control the table's 
 * `text_align` - accepts standard html property values such as `left`, `right`, `center`, `justify`.
 * `width` - accepts string representation of pixels. For instance, for the columns to have a width of 100px, you would write: width="100px".
 * `index` - bolean. False by default - If you write index=True, index of the dataframe will then be visible in your table.
+* `even_color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the font color of the even lines to be white, you would write: even_color='white'.
+* `color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the background color of the even lines to be black, you would write: even_color='black'.
 
 ```
 html_table = build_table(df
@@ -126,5 +128,7 @@ html_table = build_table(df
                         , text_align='left'
                         , width='auto'
                         , index=False
+			, even_color='black'
+			, even_bg_color='white'
                         )
 ```
