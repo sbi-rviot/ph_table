@@ -42,7 +42,7 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
                                                         + ';width: ' + str(width) + '">', len(df.columns)+1)
 
                 df_html_output = df_html_output.replace('<th>'
-                                                        ,'<td style = "background-color: ' + odd_background_color
+                                                        ,'<th style = "background-color: ' + odd_background_color
                                                         + ';font-family: ' + font_family
                                                         + ';font-size: ' + str(font_size)
                                                         + ';text-align: ' + text_align
@@ -68,7 +68,6 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding
                                                     + ';width: ' + str(width) + '">')
-            print(df_html_output)
             body = """<p>""" + format(df_html_output)
 
             a = 1
