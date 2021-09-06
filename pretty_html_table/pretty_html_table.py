@@ -17,7 +17,7 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False, even_color='black', even_bg_color='white'):
+def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False, even_color='black', even_bg_color='white', escape=True):
     if df.empty:
       return ''
      
@@ -28,7 +28,7 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
     a = 0
     while a != len(df):
         if a == 0:        
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0, escape=escape)
             # change format of header
             if index:
                 df_html_output = df_html_output.replace('<th>'
@@ -73,7 +73,7 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
             a = 1
 
         elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
@@ -98,7 +98,7 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
             a += 1       
 
         elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
