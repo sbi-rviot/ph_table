@@ -17,7 +17,8 @@ dict_colors = {
     'green_dark' : ('#FFFFFF', '2px solid #548235', '#E2EFDA', '#548235'),
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
-        
+
+
 def build_table(
 		df, 
 		color, 
@@ -28,6 +29,7 @@ def build_table(
 		index=False, 
 		even_color='black', 
 		even_bg_color='white', 
+		escape=True
 		width_dict=[]):
 
     if df.empty:
@@ -40,7 +42,7 @@ def build_table(
     a = 0
     while a != len(df):
         if a == 0:        
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0, escape=escape)
             # change format of header
             if index:
                 df_html_output = df_html_output.replace('<th>'
@@ -85,7 +87,7 @@ def build_table(
             a = 1
 
         elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
@@ -110,7 +112,7 @@ def build_table(
             a += 1       
 
         elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False)
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
