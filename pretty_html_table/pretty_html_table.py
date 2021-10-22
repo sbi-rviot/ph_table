@@ -1,4 +1,5 @@
 import pandas as pd
+import io
 
 # Reformat table_color as dict of tuples
 
@@ -17,7 +18,18 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
         
-def build_table(df, color, font_size='medium', font_family='Century Gothic, sans-serif', text_align='left', width='auto', index=False, even_color='black', even_bg_color='white'):
+def build_table(
+		df, 
+		color, 
+		font_size='medium', 
+		font_family='Century Gothic, sans-serif', 
+		text_align='left', 
+		width='auto', 
+		index=False, 
+		even_color='black', 
+		even_bg_color='white', 
+		width_dict=[]):
+
     if df.empty:
       return ''
      
@@ -141,5 +153,17 @@ def build_table(df, color, font_size='medium', font_family='Century Gothic, sans
     <tr>""","""</td>
     </tr>
     <tr>""")
-    
-    return body
+
+
+    if len(width_dict) == len(df.columns):
+        width_body = ''
+        w = 0
+        for line in io.StringIO(body):
+            width_body = width_body + repr(line).replace("width: auto", 'width: ' + width_dict[w]).replace("\\n'", "")[1:]
+            if w == len(width_dict) -1:
+                w = 0
+            else:
+                w += 1
+        return width_body[:len(width_body)-1]
+    else:
+        return body
