@@ -119,6 +119,7 @@ Several optional arguments now exist that allow the user to control the table's 
 * `index` - bolean. False by default - If you write index=True, index of the dataframe will then be visible in your table.
 * `even_color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the font color of the even lines to be white, you would write: even_color='white'.
 * `color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the background color of the even lines to be black, you would write: even_color='black'.
+* `escape` - accepts href representation of cells.
 
 ```
 html_table = build_table(df
@@ -131,5 +132,7 @@ html_table = build_table(df
                         , index=False
 			, even_color='black'
 			, even_bg_color='white'
+			, width_dict=[]
+			, escape=True
                         )
 ```
