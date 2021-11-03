@@ -29,7 +29,7 @@ def build_table(
 		index=False, 
 		even_color='black', 
 		even_bg_color='white', 
-		escape=True
+		escape=True,
 		width_dict=[]):
 
     if df.empty:
