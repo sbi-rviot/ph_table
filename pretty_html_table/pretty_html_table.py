@@ -20,17 +20,18 @@ dict_colors = {
 
 
 def build_table(
-		df, 
-		color, 
-		font_size='medium', 
-		font_family='Century Gothic, sans-serif', 
-		text_align='left', 
-		width='auto', 
-		index=False, 
-		even_color='black', 
-		even_bg_color='white', 
-		escape=True
-		width_dict=[]):
+        df, 
+        color, 
+        font_size='medium', 
+        font_family='Century Gothic, sans-serif', 
+        text_align='left', 
+        width='auto', 
+        index=False, 
+        even_color='black', 
+        even_bg_color='white', 
+        escape=True,
+        width_dict=[],
+        conditions={}):
 
     if df.empty:
       return ''
@@ -156,16 +157,68 @@ def build_table(
     </tr>
     <tr>""")
 
+    if conditions:
+        for k in conditions.keys():
+            try:
+                conditions[k]['index'] = list(df.columns).index(k)
+                width_body = ''
+                w = 0
+                for line in io.StringIO(body):
+                    updated_body = False
+                    if  w == conditions[k]['index']:
+                        try:
+                            if int(repr(line).split('>')[1].split('<')[0]) < conditions[k]['min']:
+                                if 'color: black' in repr(line):
+                                    width_body = width_body + repr(line).replace("color: black", 'color: ' + conditions[k]['min_color'])[1:]
+                                elif 'color: white' in repr(line):
+                                    width_body = width_body + repr(line).replace("color: white", 'color: ' + conditions[k]['min_color'])[1:]
+                                else:
+                                    width_body = width_body + repr(line).replace('">', '; color: ' + conditions[k]['min_color'] + '">')[1:]
+                                updated_body = True
+                            elif int(repr(line).split('>')[1].split('<')[0]) > conditions[k]['max']:
+                                if 'color: black' in repr(line):
+                                    width_body = width_body + repr(line).replace("color: black", 'color: ' + conditions[k]['max_color'])[1:]
+                                elif 'color: white' in repr(line):
+                                    width_body = width_body + repr(line).replace("color: white", 'color: ' + conditions[k]['max_color'])[1:]
+                                else:
+                                    width_body = width_body + repr(line).replace('">', '; color: ' + conditions[k]['max_color'] + '">')[1:]
+                                updated_body = True
+                        except:
+                            pass
+                    if not updated_body:
+                        width_body = width_body + repr(line)[1:]
+
+                    if str(repr(line))[:10] == "'      <td" or str(repr(line))[:10] == "'      <th":
+                        if w == len(df.columns) -1:
+                            w = 0
+                        else:
+                            w += 1
+                body = width_body[:len(width_body)-1]
+            except:
+                pass
+
+
+
 
     if len(width_dict) == len(df.columns):
         width_body = ''
         w = 0
-        for line in io.StringIO(body):
-            width_body = width_body + repr(line).replace("width: auto", 'width: ' + width_dict[w]).replace("\\n'", "")[1:]
-            if w == len(width_dict) -1:
-                w = 0
-            else:
-                w += 1
-        return width_body[:len(width_body)-1]
+        if conditions:
+            for line in body.split(r"\n'"):
+                width_body = width_body + repr(line).replace("width: auto", 'width: ' + width_dict[w])[1:]
+                if str(repr(line))[:10] == "'      <td" or str(repr(line))[:10] == "'      <th" :
+                    if w == len(df.columns) -1:
+                        w = 0
+                    else:
+                        w += 1
+        else:
+            for line in io.StringIO(body):
+                width_body = width_body + repr(line).replace("width: auto", 'width: ' + width_dict[w])[1:]
+                if str(repr(line))[:10] == "'      <td" or str(repr(line))[:10] == "'      <th" :
+                    if w == len(df.columns) -1:
+                        w = 0
+                    else:
+                        w += 1
+        return width_body[:len(width_body)-1].replace("'", "")
     else:
-        return body
+        return body.replace(r"\n'", "")

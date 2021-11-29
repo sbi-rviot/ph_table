@@ -23,9 +23,16 @@ def generate_table():
             + build_table(
                 df, 
                 'blue_light',
-                even_color='white',
-                even_bg_color='grey',
-                width_dict=['10px','200px', '50px', '10px','200px', '50px']) \
+                width_dict=['10px','700px', '50px', '10px','200px', '50px'],
+                conditions={
+                    'Age': {
+                        'min': 25,
+                        'max': 60,
+                        'min_color': 'red',
+                        'max_color': 'green',
+                    }
+                }
+                ) \
             + '<p style="font-family:Century Gothic;">blue_dark<br /><p>' \
             + build_table(df, 'blue_dark') \
             + '<p style="font-family:Century Gothic;">grey_light<br /><p>' \

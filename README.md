@@ -119,17 +119,26 @@ Several optional arguments now exist that allow the user to control the table's 
 * `index` - bolean. False by default - If you write index=True, index of the dataframe will then be visible in your table.
 * `even_color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the font color of the even lines to be white, you would write: even_color='white'.
 * `color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the background color of the even lines to be black, you would write: even_color='black'.
+* `conditions` - accepts dictionnary providing the following information: <name_of_column>: `{'min': <min range>,'max': <max range>,'min_color': <color_for_min>,'max_color': <color_for_max>}` Below is an exmaple, if a column name is "Age" and we wish to have the ages represented in red if they are under 25 and green if they are over 60.
+
 
 ```
 html_table = build_table(df
-                        , 'yellow_dark'
-                        , font_size='medium'
-                        , font_family='Open Sans
-                        , sans-serif'
-                        , text_align='left'
-                        , width='auto'
-                        , index=False
+            , 'yellow_dark'
+            , font_size='medium'
+            , font_family='Open Sans
+            , sans-serif'
+            , text_align='left'
+            , width='auto'
+            , index=False
+            ,conditions={
+                'Age': {
+                    'min': 25,
+                    'max': 60,
+                    'min_color': 'red',
+                    'max_color': 'green',
+                }
+            }
 			, even_color='black'
-			, even_bg_color='white'
-                        )
+			, even_bg_color='white')
 ```
