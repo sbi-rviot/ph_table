@@ -28,8 +28,8 @@ def build_table(
         index=False, 
         even_color='black', 
         even_bg_color='white', 
-        override_odd_bg_color=None,
-        override_border_bottom_color=None,
+        odd_bg_color=None,
+        border_bottom_color=None,
         escape=True,
         width_dict=[],
         padding="0px 20px 0px 0px",
@@ -42,11 +42,11 @@ def build_table(
     # Set color
     color, border_bottom, odd_background_color, header_background_color = dict_colors[color]
 
-    if override_odd_bg_color:
-        odd_background_color = override_odd_bg_color
+    if odd_bg_color:
+        odd_background_color = odd_bg_color
 
-    if override_border_bottom_color:
-        border_bottom = override_border_bottom_color 
+    if border_bottom_color:
+        border_bottom = border_bottom_color 
 
     a = 0
     while a != len(df):
