@@ -1,4 +1,3 @@
-import pandas as pd
 import io
 
 # Reformat table_color as dict of tuples
@@ -29,21 +28,36 @@ def build_table(
         index=False, 
         even_color='black', 
         even_bg_color='white', 
+        override_odd_bg_color=None,
+        override_border_bottom_color=None,
         escape=True,
         width_dict=[],
+        padding="0px 20px 0px 0px",
+        float_format=None,
         conditions={}):
 
     if df.empty:
       return ''
      
     # Set color
-    padding="0px 20px 0px 0px"
     color, border_bottom, odd_background_color, header_background_color = dict_colors[color]
+
+    if override_odd_bg_color:
+        odd_background_color = override_odd_bg_color
+
+    if override_border_bottom_color:
+        border_bottom = override_border_bottom_color 
 
     a = 0
     while a != len(df):
         if a == 0:        
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, border = 0, escape=escape)
+            df_html_output = df.iloc[[a]].to_html(
+                na_rep="", 
+                index=index, 
+                border=0, 
+                escape=escape, 
+                float_format=float_format,
+            )
             # change format of header
             if index:
                 df_html_output = df_html_output.replace('<th>'
@@ -196,9 +210,6 @@ def build_table(
                 body = width_body[:len(width_body)-1]
             except:
                 pass
-
-
-
 
     if len(width_dict) == len(df.columns):
         width_body = ''
