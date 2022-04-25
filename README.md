@@ -120,6 +120,9 @@ Several optional arguments now exist that allow the user to control the table's 
 * `even_color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the font color of the even lines to be white, you would write: even_color='white'.
 * `color` - accepts string representation of colors (either "white" or "FFFFF"). For instance, for the background color of the even lines to be black, you would write: even_color='black'.
 * `conditions` - accepts dictionnary providing the following information: <name_of_column>: `{'min': <min range>,'max': <max range>,'min_color': <color_for_min>,'max_color': <color_for_max>}` Below is an exmaple, if a column name is "Age" and we wish to have the ages represented in red if they are under 25 and green if they are over 60.
+* `padding` - accepts a string to set the CSS padding in the table (`10px`, `0px 20px`, `0px 20px 0px 0px`) 
+* `odd_bg_color` - accepts a hex or standard color for the odd row background 
+* `border_bottom_color` - accepts a color for the bottom border for the headers
 
 
 ```
