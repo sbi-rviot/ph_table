@@ -224,6 +224,7 @@ def build_table(
                         w += 1
         else:
             for line in io.StringIO(body):
+                line = line.replace("\n", "")
                 width_body = width_body + repr(line).replace("width: auto", 'width: ' + width_dict[w])[1:]
                 if str(repr(line))[:10] == "'      <td" or str(repr(line))[:10] == "'      <th" :
                     if w == len(df.columns) -1:
