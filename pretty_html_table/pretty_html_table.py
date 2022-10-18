@@ -24,7 +24,9 @@ def build_table(
         font_size='medium', 
         font_family='Century Gothic, sans-serif', 
         text_align='left', 
-        width='auto', 
+        width='auto',
+        last_row_weight='normal', 
+        last_row_border_top=False,
         index=False, 
         even_color='black', 
         even_bg_color='white', 
@@ -47,6 +49,11 @@ def build_table(
 
     if border_bottom_color:
         border_bottom = border_bottom_color 
+
+    if last_row_border_top == True: 
+        last_row_border_top = border_bottom
+    else:
+        last_row_border_top = ''
 
     a = 0
     while a != len(df):
@@ -101,7 +108,7 @@ def build_table(
 
             a = 1
 
-        elif a % 2 == 0:
+        elif a % 2 == 0 and a != len(df)-1:
             df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
@@ -126,7 +133,7 @@ def build_table(
 
             a += 1       
 
-        elif a % 2 != 0:
+        elif a % 2 != 0 and a != len(df)-1:
             df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
@@ -147,6 +154,64 @@ def build_table(
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+            body = body + format(df_html_output)
+
+            a += 1
+        elif a % 2 == 0 and a == len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+             
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + odd_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+
+            #change format of table
+            df_html_output = df_html_output.replace('<td>'
+                                                    ,'<td style = "background-color: ' + odd_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+
+            body = body + format(df_html_output)
+
+            a += 1       
+
+        elif a % 2 != 0 and a == len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';width: ' + str(width) + '">')
+             
+            #change format of table
+            df_html_output = df_html_output.replace('<td>'
+                                                    ,'<td style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';font-weight:' + last_row_weight
+                                                    + ';border-top:' + last_row_border_top
                                                     + ';width: ' + str(width) + '">')
             body = body + format(df_html_output)
 
