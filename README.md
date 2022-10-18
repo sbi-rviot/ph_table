@@ -123,7 +123,8 @@ Several optional arguments now exist that allow the user to control the table's 
 * `padding` - accepts a string to set the CSS padding in the table (`10px`, `0px 20px`, `0px 20px 0px 0px`) 
 * `odd_bg_color` - accepts a hex or standard color for the odd row background 
 * `border_bottom_color` - accepts a color for the bottom border for the headers
-
+* `last_row_weight` - accepts a string for formating the final row ('bold')
+* `last_row_border_top` - accepts True/False to show top border for final row
 
 ```
 html_table = build_table(df
