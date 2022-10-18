@@ -25,8 +25,8 @@ def build_table(
         font_family='Century Gothic, sans-serif', 
         text_align='left', 
         width='auto',
-        last_row_weight='normal', 
-        last_row_border_top=False,
+        last_row_weight='normal', #formats final row (e.g. bold)
+        last_row_border_top=False, #accepts True False if top border on final row is expected
         index=False, 
         even_color='black', 
         even_bg_color='white', 
