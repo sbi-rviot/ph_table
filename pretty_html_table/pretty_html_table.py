@@ -102,7 +102,8 @@ def build_table(
             a = 1
 
         elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+            df_html_output = df.iloc[[a]].to_html(na_rep="", index=index, header=False, escape=escape,
+                                                  float_format=float_format)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
@@ -127,7 +128,8 @@ def build_table(
             a += 1       
 
         elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+            df_html_output = df.iloc[[a]].to_html(na_rep="", index=index, header=False, escape=escape,
+                                                  float_format=float_format)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
