@@ -17,6 +17,17 @@ dict_colors = {
     'red_dark' : ('#FFFFFF', '2px solid #823535', '#efdada', '#823535')
 }
 
+def condition_with_row_color(row):
+    """Checks a condition on a row of a pandas dataframe and return the color to be used for the row based on the condition."""
+
+    if row['value'] < 50:
+        return 'red'
+    elif row['value'] > 50:
+        return 'green'
+    elif row['value'] == 50:
+        return 'blue'
+    else:
+        return ''
 
 def build_table(
         df, 
@@ -34,7 +45,8 @@ def build_table(
         width_dict=[],
         padding="0px 20px 0px 0px",
         float_format=None,
-        conditions={}):
+        conditions={},
+        condition_with_row_color = condition_with_row_color):
 
     if df.empty:
       return ''
@@ -46,12 +58,29 @@ def build_table(
         odd_background_color = odd_bg_color
 
     if border_bottom_color:
-        border_bottom = border_bottom_color 
+        border_bottom = border_bottom_color
+
+    # Set the original colors so we can revert after fulfilling certain conditions
+    orig_odd_background_color = odd_background_color
+    orig_even_bg_color = even_bg_color  
 
     a = 0
     while a != len(df):
+        row_info = df.iloc[[a]]
+
+        # Check for the condition and determine the color of the row
+        new_row_color = condition_with_row_color(df.loc[a])
+
+        # Update the colors if the condition is met
+        if new_row_color != '':
+            odd_background_color = new_row_color
+            even_bg_color = new_row_color
+        else:
+            odd_background_color = orig_odd_background_color
+            even_bg_color = orig_even_bg_color
+
         if a == 0:        
-            df_html_output = df.iloc[[a]].to_html(
+            df_html_output = row_info.to_html(
                 na_rep="", 
                 index=index, 
                 border=0, 
@@ -102,7 +131,7 @@ def build_table(
             a = 1
 
         elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+            df_html_output = row_info.to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
@@ -127,7 +156,7 @@ def build_table(
             a += 1       
 
         elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
+            df_html_output = row_info.to_html(na_rep = "", index = index, header = False, escape=escape)
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
