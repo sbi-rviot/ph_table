@@ -61,7 +61,7 @@ def build_table(
             # change format of header
             if index:
                 df_html_output = df_html_output.replace('<th>'
-                                                        ,'<th style = "background-color: ' + header_background_color
+                                                        ,'<th style="background-color: ' + header_background_color
                                                         + ';font-family: ' + font_family
                                                         + ';font-size: ' + str(font_size)
                                                         + ';color: ' + color
@@ -71,7 +71,7 @@ def build_table(
                                                         + ';width: ' + str(width) + '">', len(df.columns)+1)
 
                 df_html_output = df_html_output.replace('<th>'
-                                                        ,'<th style = "background-color: ' + odd_background_color
+                                                        ,'<th style="background-color: ' + odd_background_color
                                                         + ';font-family: ' + font_family
                                                         + ';font-size: ' + str(font_size)
                                                         + ';text-align: ' + text_align
@@ -80,7 +80,7 @@ def build_table(
 
             else:
                 df_html_output = df_html_output.replace('<th>'
-                                                        ,'<th style = "background-color: ' + header_background_color
+                                                        ,'<th style="background-color: ' + header_background_color
                                                         + ';font-family: ' + font_family
                                                         + ';font-size: ' + str(font_size)
                                                         + ';color: ' + color
@@ -91,7 +91,7 @@ def build_table(
 
             #change format of table
             df_html_output = df_html_output.replace('<td>'
-                                                    ,'<td style = "background-color: ' + odd_background_color
+                                                    ,'<td style="background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
@@ -106,7 +106,7 @@ def build_table(
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
-                                                    ,'<th style = "background-color: ' + odd_background_color
+                                                    ,'<th style="background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
@@ -115,7 +115,7 @@ def build_table(
 
             #change format of table
             df_html_output = df_html_output.replace('<td>'
-                                                    ,'<td style = "background-color: ' + odd_background_color
+                                                    ,'<td style="background-color: ' + odd_background_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
@@ -131,7 +131,7 @@ def build_table(
              
             # change format of index
             df_html_output = df_html_output.replace('<th>'
-                                                    ,'<th style = "background-color: ' + even_bg_color
+                                                    ,'<th style="background-color: ' + even_bg_color
                                                     + '; color: ' + even_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
@@ -141,7 +141,7 @@ def build_table(
              
             #change format of table
             df_html_output = df_html_output.replace('<td>'
-                                                    ,'<td style = "background-color: ' + even_bg_color
+                                                    ,'<td style="background-color: ' + even_bg_color
                                                     + '; color: ' + even_color
                                                     + ';font-family: ' + font_family
                                                     + ';font-size: ' + str(font_size)
