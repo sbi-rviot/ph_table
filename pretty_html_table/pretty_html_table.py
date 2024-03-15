@@ -7,7 +7,7 @@ dict_colors = {
     'grey_light' : ('#808080', '2px solid #808080', '#EDEDED', '#FFFFFF'),
     'blue_light' : ('#305496', '2px solid #305496', '#D9E1F2', '#FFFFFF'),
     'orange_light' : ('#C65911', '2px solid #C65911', '#FCE4D6', '#FFFFFF'),
-    'green_light' : ('#548235', '2px solid #548235', '#E2EFDA', '#FFFFFF'), 
+    'green_light' : ('#548235', '2px solid #548235', '#E2EFDA', '#FFFFFF'),
     'red_light' : ('#823535', '2px solid #823535', '#efdada', '#FFFFFF'),
     'yellow_dark' : ('#FFFFFF', '2px solid #BF8F00', '#FFF2CC', '#BF8F00'),
     'grey_dark' : ('#FFFFFF', '2px solid #808080', '#EDEDED', '#808080'),
@@ -19,26 +19,29 @@ dict_colors = {
 
 
 def build_table(
-        df, 
-        color, 
-        font_size='medium', 
-        font_family='Century Gothic, sans-serif', 
-        text_align='left', 
-        width='auto', 
-        index=False, 
-        even_color='black', 
-        even_bg_color='white', 
+        df,
+        color,
+        font_size='medium',
+        font_family='Century Gothic, sans-serif',
+        text_align='left',
+        width='auto',
+        last_row_weight='normal', #formats final row (e.g. bold)
+        last_row_border_top=False, #accepts True False if top border on final row is expected
+        index=False,
+        even_color='black',
+        even_bg_color='white',
         odd_bg_color=None,
         border_bottom_color=None,
         escape=True,
         width_dict=[],
         padding="0px 20px 0px 0px",
         float_format=None,
-        conditions={}):
+        conditions={},
+        **kwargs):
 
     if df.empty:
       return ''
-     
+
     # Set color
     color, border_bottom, odd_background_color, header_background_color = dict_colors[color]
 
@@ -46,17 +49,23 @@ def build_table(
         odd_background_color = odd_bg_color
 
     if border_bottom_color:
-        border_bottom = border_bottom_color 
+        border_bottom = border_bottom_color
+
+    if last_row_border_top == True:
+        last_row_border_top = border_bottom
+    else:
+        last_row_border_top = ''
 
     a = 0
     while a != len(df):
-        if a == 0:        
+        if a == 0:
             df_html_output = df.iloc[[a]].to_html(
-                na_rep="", 
-                index=index, 
-                border=0, 
-                escape=escape, 
+                na_rep="",
+                index=index,
+                border=0,
+                escape=escape,
                 float_format=float_format,
+                **kwargs,
             )
             # change format of header
             if index:
@@ -101,9 +110,9 @@ def build_table(
 
             a = 1
 
-        elif a % 2 == 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
-             
+        elif a % 2 == 0 and a != len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape, **kwargs)
+
             # change format of index
             df_html_output = df_html_output.replace('<th>'
                                                     ,'<th style = "background-color: ' + odd_background_color
@@ -124,11 +133,11 @@ def build_table(
 
             body = body + format(df_html_output)
 
-            a += 1       
+            a += 1
 
-        elif a % 2 != 0:
-            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape)
-             
+        elif a % 2 != 0 and a != len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape, **kwargs)
+
             # change format of index
             df_html_output = df_html_output.replace('<th>'
                                                     ,'<th style = "background-color: ' + even_bg_color
@@ -138,7 +147,7 @@ def build_table(
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding
                                                     + ';width: ' + str(width) + '">')
-             
+
             #change format of table
             df_html_output = df_html_output.replace('<td>'
                                                     ,'<td style = "background-color: ' + even_bg_color
@@ -147,6 +156,64 @@ def build_table(
                                                     + ';font-size: ' + str(font_size)
                                                     + ';text-align: ' + text_align
                                                     + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+            body = body + format(df_html_output)
+
+            a += 1
+        elif a % 2 == 0 and a == len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape, **kwargs)
+
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + odd_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+
+            #change format of table
+            df_html_output = df_html_output.replace('<td>'
+                                                    ,'<td style = "background-color: ' + odd_background_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';padding: ' + padding
+                                                    + ';width: ' + str(width) + '">')
+
+            body = body + format(df_html_output)
+
+            a += 1
+
+        elif a % 2 != 0 and a == len(df)-1:
+            df_html_output = df.iloc[[a]].to_html(na_rep = "", index = index, header = False, escape=escape, **kwargs)
+
+            # change format of index
+            df_html_output = df_html_output.replace('<th>'
+                                                    ,'<th style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';font-weight: ' + last_row_weight
+                                                    + ';border-top: ' + last_row_border_top
+                                                    + ';width: ' + str(width) + '">')
+
+            #change format of table
+            df_html_output = df_html_output.replace('<td>'
+                                                    ,'<td style = "background-color: ' + even_bg_color
+                                                    + '; color: ' + even_color
+                                                    + ';font-family: ' + font_family
+                                                    + ';font-size: ' + str(font_size)
+                                                    + ';text-align: ' + text_align
+                                                    + ';padding: ' + padding
+                                                    + ';font-weight:' + last_row_weight
+                                                    + ';border-top:' + last_row_border_top
                                                     + ';width: ' + str(width) + '">')
             body = body + format(df_html_output)
 
