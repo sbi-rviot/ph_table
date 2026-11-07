@@ -2,7 +2,7 @@ import pytest
 
 pd = pytest.importorskip("pandas")
 
-from src.core import build_table
+from tableloom import build_table
 
 
 def test_build_table_empty_returns_empty_string():

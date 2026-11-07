@@ -1,6 +1,6 @@
 [project]
 name = "tableloom"
-version = "0.0.1"
+version = "0.0.2"
 description = "Render tabular data into beautiful, portable HTML."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -55,3 +55,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
